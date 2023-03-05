@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",
+    "ant-design-vue": "^3.2.15",
     "highlight.js": "^11.7.0",
     "sass": "^1.58.3",
     "vue": "^3.2.38"
