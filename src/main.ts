@@ -1,6 +1,9 @@
-import { createApp } from "vue"
-import App from "./App.vue"
+import { createApp } from "vue";
+import App from "./App.vue";
+import "highlight.js/lib/common";
+import hljsVuePlugin from "@highlightjs/vue-plugin";
+import "./assets/main.css";
 
-import "./assets/main.css"
-
-createApp(App).mount("#app")
+const app = createApp(App);
+app.use(hljsVuePlugin);
+app.mount("#app");

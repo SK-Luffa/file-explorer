@@ -1,0 +1,53 @@
+.code-container {
+  height: 100%;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  
+  .code-header {
+    height: 32px;
+    line-height: 32px;
+    .list {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      color: var(--color-text);
+      background-color: var(--color-background-light);
+      .file {
+        padding: 0 12px;
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+        user-select: none;
+        .close {
+          width: 16px;
+          height: 16px;
+          line-height: 16px;
+          text-align: center;
+        }
+        &.active {
+          background-color: var(--black-dark-hover);
+        }
+      }
+    }
+  }
+
+  .editor{
+    flex: 1 1 auto;
+    pre{
+      height: 100%;
+    }
+    code{
+      height: 100%;
+    }
+  }
+  &.github-dark {
+    @import "highlight.js/scss/github-dark.scss";
+  }
+  &.atom-one-dark {
+    @import "highlight.js/scss/atom-one-dark.scss";
+  }
+}
