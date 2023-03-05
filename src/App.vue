@@ -4,6 +4,7 @@ import Code from "./components/Code/index.vue";
 import { reactive, ref } from "vue";
 import { CodeFileType, CodeStatus, type CodeFile } from "./types";
 import { CodeThemeEnum } from "./config/theme";
+import FileSelect from "./components/FileSelect/index.vue"
 
 const state = reactive({
   status: CodeStatus.CHOOSE_FILES,
@@ -33,7 +34,9 @@ const fileList = ref<CodeFile[]>([
       ></NavBar>
     </header>
     <div class="wrapper">
-      <div class="side"></div>
+      <div class="side">
+  <FileSelect/>
+      </div>
       <div class="content">
         <Code
           :status="state.status"
