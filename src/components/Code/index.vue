@@ -8,21 +8,21 @@
       <ul class="list">
         <li
           class="file"
-          :class="{ active: chooseFile?.name === item.name }"
+          :class="{ active: selectedFile?.key === item.key }"
           v-for="item in props.fileList"
-          :key="item.name"
-          @click="state.chooseName = item.name"
+          :key="item.title"
+          @click="state.selectedKey = item.key"
         >
-          <div class="text">{{ item.name }}</div>
-          <div class="close" v-if="chooseFile?.name === item.name">X</div>
+          <div class="text">{{ item.title }}</div>
+          <div class="close" v-if="selectedFile?.key === item.key">X</div>
         </li>
       </ul>
     </div>
     <div class="editor">
       <highlightjs
-        v-if="chooseFile"
-        :language="chooseFile?.type"
-        :code="chooseFile?.content"
+        v-if="selectedFile"
+        :language="selectedFile.fileType"
+        :code="selectedFile?.content"
       />
     </div>
   </div>
@@ -35,22 +35,21 @@
 <script setup lang="ts">
 import "./index.scss";
 import { reactive, computed } from "vue";
-import { CodeStatus } from "@/types";
-import type { CodeFile } from "@/types";
+import { CodeStatus, type FileType } from "@/types";
 import type { CodeThemeEnum } from "@/config/theme";
 const props = defineProps<{
   status: CodeStatus;
   themeKey: CodeThemeEnum;
-  fileList?: CodeFile[];
+  fileList?: FileType[];
 }>();
 defineEmits(["changeTheme"]);
 
 const state = reactive({
-  chooseName: "",
+  selectedKey: "",
 });
 
-const chooseFile = computed(() => {
-  const result = props.fileList?.find((item) => item.name === state.chooseName);
+const selectedFile = computed(() => {
+  const result = props.fileList?.find((item) => item.key === state.selectedKey);
   if (!result && props.fileList?.length) {
     return props.fileList[0];
   }

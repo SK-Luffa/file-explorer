@@ -1,37 +1,41 @@
-.Fileroot {
+.file-root {
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  padding-top: 8px;
+  .header {
+    color: var(--text-file-color);
+    font-size: 14px;
+  }
+  .content {
+    margin-top: 8px;
+    .file-tree {
+      background-color: var(--black-soft);
+      color: var(--text-file-color);
+
+      .ant-tree-treenode:hover::before {
+        background-color: var(--color-background);
+      }
+
+      .ant-tree-node-content-wrapper {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  .select-btn {
+    height: 40px;
+    line-height: 40px;
+    color: var(text-light-1);
     width: 100%;
-    height: 100%;
-    padding: 20px;
-    padding-top: 30px;
+    background-color: var(--btn-background);
+    text-align: center;
+    color: var(--text-file-color);
+    margin-top: 40px;
+  }
 
-    .selectBtn {
-        height: 40px;
-        line-height: 40px;
-        color: var(text-light-1);
-        width: 100%;
-        background-color: var(--btn-background);
-        text-align: center;
-        color: var(--text-file-color);
-        margin-top: 40px;
-
-    }
-
-    .selectBtn:hover {
-        cursor: pointer;
-    }
-
-    .File_tree {
-        background-color: var(--black-soft);
-        color: var(--text-file-color);
-
-        .ant-tree-treenode:hover::before {
-            background-color: var(--color-background);
-        }
-
-        .ant-tree-node-content-wrapper {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-    }
+  .select-btn:hover {
+    cursor: pointer;
+  }
 }
