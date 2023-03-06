@@ -4,17 +4,17 @@
         <!-- <div class="selectBtn" @click="fileUpLoadClick">打开文件</div> -->
 
         <div v-if="chosen_if">
-            <DirectoryTree  v-model:selectedKeys="selectedKeys" multiple
-                :tree-data="treeData"></DirectoryTree>
+            <a-directory-tree class="File_tree" v-model:selectedKeys="selectedKeys" multiple
+                :tree-data="treeData"></a-directory-tree>
         </div>
     </div>
 </template>
 <script setup lang='ts'>
 import './index.scss'
 import { ref } from 'vue'
-import { DirectoryTree } from 'ant-design-vue'
 
-let chosen_if: boolean = ref(false);//是否选中文件或文件夹，用来控制打开文件按钮和树形结构的切换
+
+let chosen_if: any = ref(false);//是否选中文件或文件夹，用来控制打开文件按钮和树形结构的切换
 
 
 const selectedKeys = ref([]);
@@ -43,15 +43,17 @@ const recurrence = (arr: any[]): any => {
     let asx: any = []
     arr.forEach((item) => {
         if (item.kind === 'file') {
-            asx.push({ title: item.name })
+            asx.push({ title: item.name, isLeaf: true })
         } else if (item.kind === 'directory') {
 
             if (item.children.length === '0') {
                 asx.push({
-                    title: item.name
+                    title: item.name,
+                    isLeaf: false,
+                    children: [],
                 })
             } else {
-                asx.push({ title: item.name, children: recurrence(item.children) })
+                asx.push({ title: item.name, children: recurrence(item.children), isLeaf: false })
             }
         }
     })
