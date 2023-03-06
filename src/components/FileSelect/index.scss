@@ -1,19 +1,37 @@
-.Fileroot{
+.Fileroot {
     width: 100%;
     height: 100%;
     padding: 20px;
     padding-top: 30px;
-    .selectBtn{
+
+    .selectBtn {
         height: 40px;
         line-height: 40px;
-        color:var(text-light-1) ;
+        color: var(text-light-1);
         width: 100%;
         background-color: var(--btn-background);
         text-align: center;
-        color: var(--text-file-color); 
+        color: var(--text-file-color);
         margin-top: 40px;
+
     }
-     .selectBtn:hover{
-         cursor: pointer;
-     }
+
+    .selectBtn:hover {
+        cursor: pointer;
+    }
+
+    .File_tree {
+        background-color: var(--black-soft);
+        color: var(--text-file-color);
+
+        .ant-tree-treenode:hover::before {
+            background-color: var(--color-background);
+        }
+
+        .ant-tree-node-content-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
 }
