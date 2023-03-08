@@ -30,7 +30,7 @@ const emit = defineEmits(["click"]);
   color: var(--text-file-color);
   padding: 8px 16px;
   outline: none;
-  
+
   &:hover {
     cursor: pointer;
     filter: brightness(0.9);
