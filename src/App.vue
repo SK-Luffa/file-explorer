@@ -13,11 +13,12 @@ type State = {
   selectedTreeKey: any[];
   selectedTreeData?: FileType;
 };
-type side_width_type = {
+type SideWidthType = {
   width: string
+  minWidth:string
  
 };
-const side_width: Ref<side_width_type> = ref({ width: "500px"  });
+const side_width: Ref<SideWidthType> = ref({ width: "500px", minWidth: '200px'});
 const state = reactive<State>({
   status: CodeStatus.NO_CHOOSE_FILES,
   themeKey: CodeThemeEnum.ATOM_ONE_DARK,
