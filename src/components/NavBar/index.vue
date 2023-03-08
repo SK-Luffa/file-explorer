@@ -1,7 +1,9 @@
 <template>
   <nav class="nav-bar-container">
     <div>
-      <a href="https://github.com/SK-Luffa/file-explorer" target="_blank"> <FireOutlined /></a>
+      <a href="https://github.com/SK-Luffa/file-explorer" target="_blank">
+        <FireOutlined
+      /></a>
     </div>
     <ul class="menus">
       <li v-for="item in menus" :key="item.key" class="menu">

@@ -51,7 +51,7 @@ const onTreeSelectedDataChange = async (node: Tree) => {
     const file = await node.item.getFile(); // 获取文件数据
     const reader = new FileReader();
     reader.readAsText(file, "utf-8"); // 读取文件(utf-8格式)
-    const fileType = (node.title.split(".") as any).at(-1); // 获取文件类型
+    const fileType = node.title.split(".").at(-1); // 获取文件类型
     reader.onload = () => {
       const fileData: FileType = {
         key: node.key,
@@ -149,7 +149,7 @@ const onStatusChange = (status: CodeStatus) => {
   .wrapper {
     display: flex;
     width: 100%;
-    height: calc(100% - 28px);
+    height: calc(100% - 36px);
 
     .side {
       height: 100%;
