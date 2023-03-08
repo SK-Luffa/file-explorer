@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^6.1.0",
     "@highlightjs/vue-plugin": "^2.1.0",
     "ant-design-vue": "^3.2.15",
     "highlight.js": "^11.7.0",

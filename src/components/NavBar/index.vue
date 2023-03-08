@@ -1,6 +1,8 @@
 <template>
   <nav class="nav-bar-container">
-    <div>logo</div>
+    <div>
+      <a href="https://github.com/SK-Luffa/file-explorer" target="_blank"> <FireOutlined /></a>
+    </div>
     <ul class="menus">
       <li v-for="item in menus" :key="item.key" class="menu">
         {{ item.title }}
@@ -42,6 +44,10 @@
 import { codeTheme, CodeThemeEnum } from "@/config/theme";
 import { reactive } from "vue";
 import type { Menus } from "@/types/menu";
+import { CodeStatus, type Tree } from "@/types";
+import { selectDirectory, recurrence } from "@/utils/file-upload";
+import { FireOutlined } from "@ant-design/icons-vue";
+
 type NavBarProps = {
   themeKey: CodeThemeEnum;
 };
@@ -59,18 +65,18 @@ const menus: Menus = [
     key: "file",
     title: "文件",
     children: [
-      {
-        key: "choose-file",
-        title: "选择文件",
-        handle: () => {
-          console.log("选择文件");
-        },
-      },
+      // {
+      //   key: "choose-file",
+      //   title: "选择文件",
+      //   handle: () => {
+      //     console.log("选择文件");
+      //   },
+      // },
       {
         key: "choose-folder",
         title: "选择文件夹",
         handle: () => {
-          console.log("选择文件夹");
+          fileShowDirectoryPicker();
         },
       },
     ],
@@ -92,6 +98,7 @@ const menus: Menus = [
 ];
 
 defineProps<NavBarProps>();
+const emit = defineEmits(["changeTheme", "treeDataChange", "statusChange"]);
 
 const state = reactive<NavBarState>({
   modal: {
@@ -99,6 +106,22 @@ const state = reactive<NavBarState>({
     type: "theme",
   },
 });
+
+const fileShowDirectoryPicker = async () => {
+  const res = await selectDirectory();
+  const treeData = recurrence([res]);
+  onTreeDataChange(treeData);
+  onStatusChange(CodeStatus.CHOOSE_FILES);
+  console.log(treeData, "treeData");
+};
+
+const onTreeDataChange = (data: Tree[]) => {
+  emit("treeDataChange", data);
+};
+
+const onStatusChange = (status: CodeStatus) => {
+  emit("statusChange", status);
+};
 </script>
 
 <style lang="scss" scoped>

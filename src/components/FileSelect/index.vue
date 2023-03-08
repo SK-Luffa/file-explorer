@@ -11,16 +11,17 @@
           @select="onTreeSelectChange"
         ></a-directory-tree>
       </div>
-      <div v-else class="select-btn" @click="fileShowDirectoryPicker">
-        打开文件夹
+      <div v-else class="select-btn">
+        <Button :width="300" @click="fileShowDirectoryPicker"> 打开文件夹</Button>
       </div>
       <!-- <div class="selectBtn" @click="fileUpLoadClick">打开文件</div> -->
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { CodeStatus, type FileType } from "@/types";
-import { recurrence, selectDirectory } from "@/utils/FileUpload";
+import { CodeStatus, type FileType, type Tree } from "@/types";
+import { recurrence, selectDirectory } from "@/utils/file-upload";
+import Button from "@/components/Button/index.vue";
 
 type FileSelectProps = {
   status: CodeStatus;
@@ -30,7 +31,7 @@ type FileSelectProps = {
 const props = defineProps<FileSelectProps>();
 
 const emit = defineEmits([
-  "treeSelectedChange",
+  "treeSelectedKeysChange",
   "treeDataChange",
   "statusChange",
   "treeSelectedDataChange",
@@ -45,12 +46,11 @@ const fileShowDirectoryPicker = async () => {
 };
 
 const onTreeSelectChange = (keys: any[], e: any) => {
-  console.log(keys, "keys");
-  emit("treeSelectedDataChange", e.selectedNodes);
-  emit("treeSelectedChange", keys);
+  emit("treeSelectedDataChange", e.selectedNodes[0]);
+  emit("treeSelectedKeysChange", keys, e.selectedNodes[0].isLeaf);
 };
 
-const onTreeDataChange = (data: FileType[]) => {
+const onTreeDataChange = (data: Tree[]) => {
   emit("treeDataChange", data);
 };
 
