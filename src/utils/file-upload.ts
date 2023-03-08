@@ -1,4 +1,4 @@
-import type { FileType, Tree } from "@/types";
+import type { Tree } from "@/types";
 
 export const selectDirectory = () =>
   new Promise<any>((reslove, reject) => {
@@ -22,40 +22,26 @@ export const recurrence = (arr: any[], path: string = "/"): Tree[] => {
   const asx: Tree[] = [];
   arr.forEach(async (item) => {
     if (item.kind === "file") {
-      // const file = await item.getFile();
-      // const reader = new FileReader();
-      // reader.readAsText(file, "utf-8");
       asx.push({
         key: path + item.name,
         title: item.name,
         isLeaf: true,
-        // kind: item.kind,
-        item:item,               
-        // file,
-        // fileType: item.name.split(".").at(-1),
-        // content: reader.result as string,
+        item: item,
       });
-      // reader.onload = () => {
-       
-      // };
     } else if (item.kind === "directory") {
       if (item.children?.length === "0") {
         asx.push({
           key: path + item.name,
           title: item.name,
           isLeaf: false,
-          item:item,
-          // kind: item.kind,
-          // fileType: item.name.split(".").at(-1),
-      
+          item: item,
           children: [],
         });
       } else {
         asx.push({
           key: path + item.name,
           title: item.name,
-          // kind: item.kind,
-          item:item,
+          item: item,
           children: recurrence(item.children, `${path}` + `${item.name}/`),
           isLeaf: false,
         });
