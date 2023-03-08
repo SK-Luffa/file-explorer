@@ -3,6 +3,7 @@
   height: 100%;
   padding: 16px;
   padding-top: 8px;
+  text-align: center;
   .header {
     color: var(--text-file-color);
     font-size: 14px;
@@ -25,11 +26,14 @@
     }
   }
   .select-btn {
+    display: inline-block;
     height: 40px;
     line-height: 40px;
     color: var(text-light-1);
-    width: 100%;
+        width: 100%;
+          max-width: 300px;
     background-color: var(--btn-background);
+
     text-align: center;
     color: var(--text-file-color);
     margin-top: 40px;

@@ -1,4 +1,4 @@
-import type { FileType } from "@/types";
+import type { FileType, Tree } from "@/types";
 
 export const selectDirectory = () =>
   new Promise<any>((reslove, reject) => {
@@ -18,39 +18,44 @@ export const selectDirectory = () =>
   });
 
 // 写一个递归方法 将得到文件夹树形句柄转换为antd需要的样子
-export const recurrence = (arr: any[], path: string = "/"): FileType[] => {
-  const asx: FileType[] = [];
+export const recurrence = (arr: any[], path: string = "/"): Tree[] => {
+  const asx: Tree[] = [];
   arr.forEach(async (item) => {
     if (item.kind === "file") {
-      const file = await item.getFile();
-      const reader = new FileReader();
-      reader.readAsText(file, "utf-8");
-      reader.onload = () => {
-        asx.push({
-          key: path + item.name,
-          title: item.name,
-          isLeaf: true,
-          kind: item.kind,
-          file,
-          fileType: item.name.split(".").at(-1),
-          content: reader.result as string,
-        });
-      };
+      // const file = await item.getFile();
+      // const reader = new FileReader();
+      // reader.readAsText(file, "utf-8");
+      asx.push({
+        key: path + item.name,
+        title: item.name,
+        isLeaf: true,
+        // kind: item.kind,
+        item:item,               
+        // file,
+        // fileType: item.name.split(".").at(-1),
+        // content: reader.result as string,
+      });
+      // reader.onload = () => {
+       
+      // };
     } else if (item.kind === "directory") {
       if (item.children?.length === "0") {
         asx.push({
           key: path + item.name,
           title: item.name,
-          kind: item.kind,
-          fileType: item.name.split(".").at(-1),
           isLeaf: false,
+          item:item,
+          // kind: item.kind,
+          // fileType: item.name.split(".").at(-1),
+      
           children: [],
         });
       } else {
         asx.push({
           key: path + item.name,
           title: item.name,
-          kind: item.kind,
+          // kind: item.kind,
+          item:item,
           children: recurrence(item.children, `${path}` + `${item.name}/`),
           isLeaf: false,
         });

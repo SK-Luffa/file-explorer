@@ -35,3 +35,12 @@ export type FileType = {
   content?: string; // 文件内容(文本)
   children?: FileType[]; // 子节点
 };
+// 树形结构所需的属性
+export type Tree={
+  key:string//唯一路径
+  title:string//名称
+  item: FileSystemDirectoryHandle//文件流
+  isLeaf: boolean // 是否是叶子节点
+  children?: Tree[] // 子节点
+
+}

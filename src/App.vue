@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import NavBar from "./components/NavBar/index.vue";
 import Code from "./components/Code/index.vue";
-import { reactive, ref } from "vue";
+import { reactive, ref, type Ref } from "vue";
 import { CodeStatus } from "./types";
 import { CodeThemeEnum } from "./config/theme";
 import FileSelect from "./components/FileSelect/index.vue";
@@ -13,7 +13,11 @@ type State = {
   selectedTreeKey: any[];
   selectedTreeData?: FileType;
 };
-
+type side_width_type = {
+  width: string
+ 
+};
+const side_width: Ref<side_width_type> = ref({ width: "500px"  });
 const state = reactive<State>({
   status: CodeStatus.NO_CHOOSE_FILES,
   themeKey: CodeThemeEnum.ATOM_ONE_DARK,
@@ -54,7 +58,7 @@ const onStatusChange = (status: CodeStatus) => {
       ></NavBar>
     </header>
     <div class="wrapper">
-      <div class="side">
+      <div class="side" :style="side_width">
         <FileSelect
           :status="state.status"
           :selectedTreeKey="state.selectedTreeKey"
@@ -90,7 +94,7 @@ const onStatusChange = (status: CodeStatus) => {
     height: calc(100% - 28px);
 
     .side {
-      width: 200px;
+   
       height: 100%;
       background-color: var(--black-soft);
     }

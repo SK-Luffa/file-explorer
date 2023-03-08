@@ -20,7 +20,7 @@
 </template>
 <script setup lang="ts">
 import { CodeStatus, type FileType } from "@/types";
-import { recurrence, selectDirectory } from "@/utils/fileUpload";
+import { recurrence, selectDirectory } from "@/utils/FileUpload";
 
 type FileSelectProps = {
   status: CodeStatus;
