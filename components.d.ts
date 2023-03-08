@@ -10,6 +10,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ADirectoryTree: typeof import('ant-design-vue/es')['DirectoryTree']
+    Button: typeof import('./src/components/Button/index.vue')['default']
     Code: typeof import('./src/components/Code/index.vue')['default']
     FileSelect: typeof import('./src/components/FileSelect/index.vue')['default']
     NavBar: typeof import('./src/components/NavBar/index.vue')['default']

@@ -10,3 +10,16 @@
  ```yarn or npm install```
 
   ```yarn dev```
+
+# 项目规范
+
+## 代码规范
+
+### 命名规范
+- css类名：使用用短横线命名，如：`.code-container`
+- js属性名：使用小驼峰命名，如：`createTime`
+- js函数名：使用小驼峰命名，如：`onSubmit、onVisibleChange`
+- ts类型名|枚举名：使用大驼峰命名，如：`CodeProps、TreeProps、TreeState`
+- ts枚举属性名：使用全大写+下划线连接，如：`GITHUB_THEME`
+- 组件名：使用大驼峰，如：`Modal、TreeSelect`
+- ts|js文件名：使用大驼峰，如：`config.js、menu.js、getTime.js`

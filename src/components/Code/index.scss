@@ -1,12 +1,12 @@
 .code-container {
   height: 100%;
-  font-size: 12px;
+  font-size: 14px;
   display: flex;
   flex-direction: column;
   
   .code-header {
-    height: 32px;
-    line-height: 32px;
+    height: 40px;
+    line-height: 40px;
     .list {
       display: flex;
       align-items: center;
@@ -14,8 +14,8 @@
       color: var(--color-text);
       background-color: var(--color-background-light);
       .file {
-        padding: 0 12px;
-        width: 100px;
+        padding: 0 16px;
+        max-width: 200px;
         overflow: hidden;
         text-overflow: ellipsis;
         justify-content: space-between;
@@ -27,9 +27,21 @@
           height: 16px;
           line-height: 16px;
           text-align: center;
+          opacity: 0;
+          margin-left: 8px;
+          cursor: pointer;
+          &.active {
+            color: #fff;
+            opacity: 1;
+          }
         }
         &.active {
           background-color: var(--black-dark-hover);
+        }
+        &:hover{
+          .close{
+            opacity: 1;
+          }
         }
       }
     }
@@ -37,17 +49,27 @@
 
   .editor{
     flex: 1 1 auto;
+    overflow: hidden;
+    
     pre{
       height: 100%;
+     
     }
     code{
       height: 100%;
+      padding-bottom: 48px;
     }
   }
+  
   &.github-dark {
     @import "highlight.js/scss/github-dark.scss";
   }
   &.atom-one-dark {
     @import "highlight.js/scss/atom-one-dark.scss";
   }
+}
+
+.empty{
+  width: 200px;
+  margin: 200px auto;
 }

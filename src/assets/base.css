@@ -12,8 +12,10 @@
   --black-dark-hover: #1f1f1f;
   --black-default-blue: #094771;
 
-  --btn-color:#007acc;
-
+  --primary-color: #007acc;
+  --success-color: #7acc00;
+  --error-color: #cc2200;
+  --default-color: transparent;
 
   --indigo: #2c3e50;
 
@@ -26,8 +28,7 @@
   --text-light-2: rgba(60, 60, 60, 0.66);
   --text-dark-1: var(--white);
   --text-dark-2: rgba(235, 235, 235, 0.64);
-  --text-file-color:#fff;
-  
+  --text-file-color: #fff;
 }
 
 /* semantic color variables for this project */
@@ -38,7 +39,6 @@
   --color-background-light: var(--black-light);
   --color-background-hover: var(--black-hover);
 
-
   --color-border: var(--divider-dark-2);
   --color-border-hover: var(--divider-dark-1);
 
@@ -46,7 +46,12 @@
   --color-text: var(--text-dark-2);
 
   --section-gap: 160px;
-  --btn-background:var(--btn-color)
+
+  --button-primary-background: var(--primary-color);
+  --button-success-background: var(--success-color);
+  --button-error-background: var(--error-color);
+  --button-default-background: var(--default-color);
+  --button-background-hover: var(--black-dark-hover);
 }
 
 @media (prefers-color-scheme: dark) {
