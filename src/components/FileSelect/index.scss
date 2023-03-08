@@ -42,4 +42,8 @@
   .select-btn:hover {
     cursor: pointer;
   }
+// 这个是ant 树形组件文字偏移的bug修复
+    .ant-tree-node-content-wrapper{
+      text-align: left;
+    }
 }
