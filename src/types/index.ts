@@ -23,3 +23,24 @@ export type CodeFile = {
   type: CodeFileType; // 文件类型
   content: string; // 文件内容
 };
+
+// 文件树类型
+export type FileType = {
+  key: string; // 文件key(唯一) 路径
+  title: string; // 文件名
+  isLeaf: boolean; // 是否是叶子节点
+  kind: string;
+  fileType?: string; // 文件类型
+  file?: File; // 文件
+  content?: string; // 文件内容(文本)
+  children?: FileType[]; // 子节点
+};
+// 树形结构所需的属性
+export type Tree={
+  key:string//唯一路径
+  title:string//名称
+  item: FileSystemDirectoryHandle//文件流
+  isLeaf: boolean // 是否是叶子节点
+  children?: Tree[] // 子节点
+
+}
