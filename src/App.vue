@@ -2,17 +2,17 @@
 import NavBar from "./components/NavBar/index.vue";
 import Code from "./components/Code/index.vue";
 import { reactive, ref, type Ref } from "vue";
-import { CodeStatus, type Tree } from "./types";
+import { CodeStatus, imageTypeEmnu, type Tree } from "./types";
 import { CodeThemeEnum } from "./config/theme";
 import FileSelect from "./components/FileSelect/index.vue";
 import type { FileType } from "@/types";
+import { checkFileText } from "./utils";
 type State = {
   status: CodeStatus; // 是否选中文件
   themeKey: CodeThemeEnum; // 主题key
   treeData: Tree[]; // 文件树数据
   selectedTreeKeys: string[]; // 选中的文件树的节点key
   selectedTreeData?: Tree; // 选中的文件树的节点data
-  selectedFileKey: string; // 选中的文件key
 };
 // 侧边栏宽度
 type SideWidthType = {
@@ -20,7 +20,7 @@ type SideWidthType = {
   minWidth: number;
 };
 const sideWidth: Ref<SideWidthType> = ref({
-  width: 500,
+  width: 400,
   minWidth: 200,
 });
 
@@ -29,37 +29,70 @@ const state = reactive<State>({
   themeKey: CodeThemeEnum.ATOM_ONE_DARK,
   treeData: [],
   selectedTreeKeys: [],
-  selectedFileKey: "",
 });
 
-const codeFileList = ref<FileType[]>([]); // 编辑器区域的文件列表
+const codeState = reactive({
+  selectedFileKey: "", // 选中的文件key
+  codeFileList: [] as FileType[], // 编辑器区域的文件列表
+});
 
 // 选中的文件列表
 const onTreeSelectedKeyChange = (keys: string[], isLeaf?: boolean) => {
   state.selectedTreeKeys = keys;
-  console.log(isLeaf);
   if (isLeaf) {
-    state.selectedFileKey = keys[0];
+    codeState.selectedFileKey = keys[0];
   }
 };
 
 // 选中的文件数据
 const onTreeSelectedDataChange = async (node: Tree) => {
   state.selectedTreeData = node;
-  if (codeFileList.value.find((item) => item.key === node.key)) return; // 如果已经存在了就不再加入文件列表
+  if (codeState.codeFileList.find((item) => item.key === node.key)) return; // 如果已经存在了就不再加入文件列表
   if (node.isLeaf) {
+    const fileType = node.title.split(".").at(-1); // 获取文件类型
+
     const file = await node.item.getFile(); // 获取文件数据
     const reader = new FileReader();
-    reader.readAsText(file, "utf-8"); // 读取文件(utf-8格式)
-    const fileType = node.title.split(".").at(-1); // 获取文件类型
+
+    const fileData: FileType = {
+      key: node.key,
+      title: node.title,
+      content: (reader.result || undefined) as string | undefined,
+      fileType: fileType,
+      file,
+    };
+    if (codeState.codeFileList.length > 5) {
+      codeState.codeFileList.splice(5, 0, fileData);
+    } else {
+      codeState.codeFileList.push(fileData);
+    }
+
+    if (imageTypeEmnu.includes(file.type)) {
+      // 图片类型
+      reader.readAsDataURL(file); // 读取文件(二进制格式)
+    } else if (checkFileText(file)) {
+      // 文本类型
+      reader.readAsText(file, "utf-8"); // 读取文件(utf-8格式)
+    } else if (file.type.includes("video")) {
+      // 视频类型
+      reader.readAsDataURL(file); // 读取文件(二进制格式)
+    } else {
+      console.log("其他类型");
+      // 其他类型 暂不支持
+      // 读取文件(utf-8格式)
+      return;
+    }
+
     reader.onload = () => {
-      const fileData: FileType = {
-        key: node.key,
-        title: node.title,
-        content: reader.result as string,
-        fileType: fileType,
-      };
-      codeFileList.value.push(fileData);
+      fileData.content = reader.result as string;
+      codeState.codeFileList = [
+        ...codeState.codeFileList.map((item) => {
+          if (item.key === node.key) {
+            return fileData;
+          }
+          return item;
+        }),
+      ];
     };
   }
 };
@@ -67,9 +100,15 @@ const onTreeSelectedDataChange = async (node: Tree) => {
 // 编辑器区域改动选择的文件列表 处理函数
 const onCodeSelectedChange = (data: FileType[]) => {
   if (data.length === 0) {
-    state.selectedTreeKeys = [];
+    codeState.codeFileList = [];
+    return;
   }
-  codeFileList.value = data;
+  const res = data.find((item) => item.key === codeState.selectedFileKey);
+  if (!res) {
+    state.selectedTreeKeys = [];
+    codeState.selectedFileKey = data[0].key;
+  }
+  codeState.codeFileList = data;
 };
 
 // 文件树数据改变
@@ -78,8 +117,8 @@ const onTreeDataChange = (data: Tree[]) => {
   if (state.treeData) {
     // 如果选择过文件夹，重置选中的文件列表
     state.selectedTreeKeys = [];
-    state.selectedFileKey = "";
-    codeFileList.value = [];
+    codeState.selectedFileKey = "";
+    codeState.codeFileList = [];
   }
 };
 
@@ -126,9 +165,9 @@ const onStatusChange = (status: CodeStatus) => {
         <Code
           :status="state.status"
           :themeKey="state.themeKey"
-          :fileList="codeFileList"
-          :selectedFileKey="state.selectedFileKey"
-          @selectedFileKeychange="(key) => (state.selectedFileKey = key)"
+          :fileList="codeState.codeFileList"
+          :selectedFileKey="codeState.selectedFileKey"
+          @selectedFileKeychange="(key) => (codeState.selectedFileKey = key)"
           @selectedDataChange="onCodeSelectedChange"
           @status-change="onStatusChange"
           @tree-data-change="onTreeDataChange"
@@ -158,6 +197,7 @@ const onStatusChange = (status: CodeStatus) => {
     .content {
       flex: 1 1 auto;
       height: 100%;
+      background-color: var(--color-background);
     }
   }
 }

@@ -4,9 +4,9 @@
   --white-soft: #f8f8f8;
   --white-mute: #f2f2f2;
 
-  --black: #181818;
-  --black-soft: #222222;
-  --black-mute: #353535;
+  --black: #222222;
+  --black-soft: rgba(37,37,38);
+  --black-mute: rgb(51, 51, 51);
   --black-light: #282828;
   --black-hover: rgba(255, 255, 255, 0.1);
   --black-dark-hover: #1f1f1f;
