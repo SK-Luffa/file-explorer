@@ -41,3 +41,11 @@ export type Tree = {
   isLeaf: boolean; // 是否是叶子节点
   children?: Tree[]; // 子节点
 };
+
+export type ImageType = "image/png" | "image/jpeg" | "image/gif" | "image/webp";
+export const imageTypeEmnu = [
+  "image/png",
+  "image/jpeg",
+  "image/gif",
+  "image/webp",
+];

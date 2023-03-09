@@ -114,7 +114,6 @@ const fileShowDirectoryPicker = async () => {
   const treeData = recurrence([res]);
   onTreeDataChange(treeData);
   onStatusChange(CodeStatus.CHOOSE_FILES);
-  console.log(treeData, "treeData");
 };
 
 const onTreeDataChange = (data: Tree[]) => {

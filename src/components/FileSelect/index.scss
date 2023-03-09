@@ -4,12 +4,18 @@
   padding: 16px;
   padding-top: 8px;
   text-align: center;
+  
   .header {
+    height: 48px;
+    line-height: 48px;
     color: var(--text-file-color);
     font-size: 14px;
+    text-align: left;
   }
   .content {
+    height: calc(100% - 48px);
     margin-top: 8px;
+    overflow: auto;
     .file-tree {
       background-color: var(--black-soft);
       color: var(--text-file-color);
