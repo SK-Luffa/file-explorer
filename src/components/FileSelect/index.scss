@@ -21,7 +21,7 @@
       color: var(--text-file-color);
 
       .ant-tree-treenode:hover::before {
-        background-color: var(--color-background);
+        background-color: var(--black-dark-light-hover);
       }
 
       .ant-tree-node-content-wrapper {
