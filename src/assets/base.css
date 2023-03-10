@@ -10,6 +10,7 @@
   --black-light: #282828;
   --black-hover: rgba(255, 255, 255, 0.1);
   --black-dark-hover: #1f1f1f;
+  --black-dark-light-hover: rgba(255,255,255,0.2);
   --black-default-blue: #094771;
 
   --primary-color: #007acc;
