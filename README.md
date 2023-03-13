@@ -4,7 +4,7 @@
 
 提示：目前此项目仍属于正在开发状态，有些地方正在商榷，欢迎参考学习， 如果你喜欢这个项目，请Star
 
-> 预览：https://preview-file-explorer-ten.vercel.app
+> 预览：https://file-explorer-xi.vercel.app/
 
 安装： 
  ``` git clone git@github.com:SK-Luffa/file-explorer.git```
