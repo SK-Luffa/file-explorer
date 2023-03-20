@@ -10,9 +10,9 @@ export const getFileSizeResult = (file: File) => {
 
 // 判断文件是否是可以以文本展示
 export const checkFileText = (file: File) => {
-  if (file.type === "" || file.type.includes("text")) {
+  if (file.type === '' || file.type.includes('text')) {
     return true;
-  } else if (file.type.includes("json")) {
+  } else if (file.type.includes('json')) {
     return true;
   } else {
     return false;

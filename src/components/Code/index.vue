@@ -64,14 +64,14 @@
 </template>
 
 <script setup lang="ts">
-import "./index.scss";
-import { computed } from "vue";
-import { CodeStatus, imageTypeEmnu, type FileType, type Tree } from "@/types";
-import type { CodeThemeEnum } from "@/config/theme";
-import { CloseOutlined } from "@ant-design/icons-vue";
-import { recurrence, selectDirectory } from "@/utils/file-upload";
-import Button from "@/components/Button/index.vue";
-import { checkFileText, getFileSizeResult } from "@/utils";
+import './index.scss';
+import { computed } from 'vue';
+import { CodeStatus, imageTypeEmnu, type FileType, type Tree } from '@/types';
+import type { CodeThemeEnum } from '@/config/theme';
+import { CloseOutlined } from '@ant-design/icons-vue';
+import { recurrence, selectDirectory } from '@/utils/file-upload';
+import Button from '@/components/Button/index.vue';
+import { checkFileText, getFileSizeResult } from '@/utils';
 
 const props = defineProps<{
   status: CodeStatus;
@@ -80,17 +80,17 @@ const props = defineProps<{
   fileList?: FileType[]; // 文件列表
 }>();
 const emit = defineEmits([
-  "changeTheme",
-  "selectedFileKeychange",
-  "selectedDataChange",
-  "treeDataChange",
-  "statusChange",
+  'changeTheme',
+  'selectedFileKeychange',
+  'selectedDataChange',
+  'treeDataChange',
+  'statusChange',
 ]);
 
 // 选中的文件
 const selectedFile = computed(() => {
   const result = props.fileList?.find(
-    (item) => item.key === props.selectedFileKey
+    (item) => item.key === props.selectedFileKey,
   );
   if (!result && props.fileList?.length === 1) {
     return props.fileList[0];
@@ -108,16 +108,16 @@ const fileShowDirectoryPicker = async () => {
 
 // 树形结构变化
 const onTreeDataChange = (data: Tree[]) => {
-  emit("treeDataChange", data);
+  emit('treeDataChange', data);
 };
 // 是否选择文件状态变化
 const onStatusChange = (status: CodeStatus) => {
-  emit("statusChange", status);
+  emit('statusChange', status);
 };
 // 选中的文件变化
 const onSelectedDataChange = (key: string) => {
   const data = props.fileList?.filter((item) => item.key !== key);
-  emit("selectedDataChange", data);
+  emit('selectedDataChange', data);
 };
 </script>
 

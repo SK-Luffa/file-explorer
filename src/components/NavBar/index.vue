@@ -43,12 +43,12 @@
 </template>
 
 <script setup lang="ts">
-import { codeTheme, CodeThemeEnum } from "@/config/theme";
-import { reactive } from "vue";
-import type { Menus } from "@/types/menu";
-import { CodeStatus, type Tree } from "@/types";
-import { selectDirectory, recurrence } from "@/utils/file-upload";
-import { FireOutlined } from "@ant-design/icons-vue";
+import { codeTheme, CodeThemeEnum } from '@/config/theme';
+import { reactive } from 'vue';
+import type { Menus } from '@/types/menu';
+import { CodeStatus, type Tree } from '@/types';
+import { selectDirectory, recurrence } from '@/utils/file-upload';
+import { FireOutlined } from '@ant-design/icons-vue';
 
 type NavBarProps = {
   themeKey: CodeThemeEnum;
@@ -58,14 +58,14 @@ type NavBarState = {
   // 弹窗
   modal: {
     visible: boolean;
-    type: "theme"; //后续会扩展
+    type: 'theme'; //后续会扩展
   };
 };
 
 const menus: Menus = [
   {
-    key: "file",
-    title: "文件",
+    key: 'file',
+    title: '文件',
     children: [
       // {
       //   key: "choose-file",
@@ -75,8 +75,8 @@ const menus: Menus = [
       //   },
       // },
       {
-        key: "choose-folder",
-        title: "选择文件夹",
+        key: 'choose-folder',
+        title: '选择文件夹',
         handle: () => {
           fileShowDirectoryPicker();
         },
@@ -84,15 +84,15 @@ const menus: Menus = [
     ],
   },
   {
-    key: "theme",
-    title: "主题",
+    key: 'theme',
+    title: '主题',
     children: [
       {
-        key: "editor-theme",
-        title: "切换编辑器主题",
+        key: 'editor-theme',
+        title: '切换编辑器主题',
         handle() {
           state.modal.visible = true;
-          state.modal.type = "theme";
+          state.modal.type = 'theme';
         },
       },
     ],
@@ -100,12 +100,12 @@ const menus: Menus = [
 ];
 
 defineProps<NavBarProps>();
-const emit = defineEmits(["changeTheme", "treeDataChange", "statusChange"]);
+const emit = defineEmits(['changeTheme', 'treeDataChange', 'statusChange']);
 
 const state = reactive<NavBarState>({
   modal: {
     visible: false,
-    type: "theme",
+    type: 'theme',
   },
 });
 
@@ -117,14 +117,14 @@ const fileShowDirectoryPicker = async () => {
 };
 
 const onTreeDataChange = (data: Tree[]) => {
-  emit("treeDataChange", data);
+  emit('treeDataChange', data);
 };
 
 const onStatusChange = (status: CodeStatus) => {
-  emit("statusChange", status);
+  emit('statusChange', status);
 };
 </script>
 
 <style lang="scss" scoped>
-@import "./index.scss";
+@import './index.scss';
 </style>
