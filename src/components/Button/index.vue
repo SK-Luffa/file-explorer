@@ -2,7 +2,7 @@
   <button
     class="my-button"
     :style="{
-      width: width + 'px',
+      width: width,
       backgroundColor: `var(--button-${type}-background)`,
     }"
     @click="emit('click')"
@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 type ButtonProps = {
-  width?: number;
+  width?: string;
   type?: "primary" | "success" | "error" | "default";
 };
 
