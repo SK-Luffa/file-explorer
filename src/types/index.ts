@@ -6,15 +6,15 @@ export type CodeTheme = {
 
 // 编辑器状态枚举
 export enum CodeStatus {
-  NO_CHOOSE_FILES = "NO_CHOOSE_FILES", // 未选择文件
-  CHOOSE_FILES = "CHOOSE_FILES", // 已选择文件
+  NO_CHOOSE_FILES = 'NO_CHOOSE_FILES', // 未选择文件
+  CHOOSE_FILES = 'CHOOSE_FILES', // 已选择文件
 }
 
 // 编辑器文件类型
 export enum CodeFileType {
-  MD = "md",
-  JS = "js",
-  TS = "ts",
+  MD = 'md',
+  JS = 'js',
+  TS = 'ts',
 }
 
 // 编辑器文件包含属性
@@ -42,10 +42,10 @@ export type Tree = {
   children?: Tree[]; // 子节点
 };
 
-export type ImageType = "image/png" | "image/jpeg" | "image/gif" | "image/webp";
+export type ImageType = 'image/png' | 'image/jpeg' | 'image/gif' | 'image/webp';
 export const imageTypeEmnu = [
-  "image/png",
-  "image/jpeg",
-  "image/gif",
-  "image/webp",
+  'image/png',
+  'image/jpeg',
+  'image/gif',
+  'image/webp',
 ];

@@ -14,13 +14,13 @@
 <script setup lang="ts">
 type ButtonProps = {
   width?: string;
-  type?: "primary" | "success" | "error" | "default";
+  type?: 'primary' | 'success' | 'error' | 'default';
 };
 
 withDefaults(defineProps<ButtonProps>(), {
-  type: "primary",
+  type: 'primary',
 });
-const emit = defineEmits(["click"]);
+const emit = defineEmits(['click']);
 </script>
 
 <style lang="scss" scoped>

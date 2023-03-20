@@ -22,10 +22,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { CodeStatus, type FileType, type Tree } from "@/types";
-import { recurrence, selectDirectory } from "@/utils/file-upload";
-import Button from "@/components/Button/index.vue";
-import { reactive } from "vue";
+import { CodeStatus, type FileType, type Tree } from '@/types';
+import { recurrence, selectDirectory } from '@/utils/file-upload';
+import Button from '@/components/Button/index.vue';
+import { reactive } from 'vue';
 
 type FileSelectProps = {
   status: CodeStatus;
@@ -39,10 +39,10 @@ const state = reactive({
 });
 
 const emit = defineEmits([
-  "treeSelectedKeysChange",
-  "treeDataChange",
-  "statusChange",
-  "treeSelectedDataChange",
+  'treeSelectedKeysChange',
+  'treeDataChange',
+  'statusChange',
+  'treeSelectedDataChange',
 ]);
 
 const fileShowDirectoryPicker = async () => {
@@ -55,21 +55,21 @@ const fileShowDirectoryPicker = async () => {
 
 // 点击某个文件/文件夹
 const onTreeSelectChange = (keys: string[], e: any) => {
-  emit("treeSelectedDataChange", e.selectedNodes[0]);
-  emit("treeSelectedKeysChange", keys, e.selectedNodes[0].isLeaf);
+  emit('treeSelectedDataChange', e.selectedNodes[0]);
+  emit('treeSelectedKeysChange', keys, e.selectedNodes[0].isLeaf);
 };
 
 // 选择文件夹
 const onTreeDataChange = (data: Tree[]) => {
-  emit("treeDataChange", data);
+  emit('treeDataChange', data);
 };
 
 // 是否选择文件夹状态改变
 const onStatusChange = (status: CodeStatus) => {
-  emit("statusChange", status);
+  emit('statusChange', status);
 };
 </script>
 
 <style lang="scss">
-@import "./index.scss";
+@import './index.scss';
 </style>

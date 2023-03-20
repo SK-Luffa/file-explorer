@@ -1,4 +1,4 @@
-import type { Tree } from "@/types";
+import type { Tree } from '@/types';
 
 export const selectDirectory = () =>
   new Promise<any>((reslove, reject) => {
@@ -18,18 +18,18 @@ export const selectDirectory = () =>
   });
 
 // 写一个递归方法 将得到文件夹树形句柄转换为antd需要的样子
-export const recurrence = (arr: any[], path: string = "/"): Tree[] => {
+export const recurrence = (arr: any[], path: string = '/'): Tree[] => {
   const asx: Tree[] = [];
   arr.forEach(async (item) => {
-    if (item.kind === "file") {
+    if (item.kind === 'file') {
       asx.push({
         key: path + item.name,
         title: item.name,
         isLeaf: true,
         item: item,
       });
-    } else if (item.kind === "directory") {
-      if (item.children?.length === "0") {
+    } else if (item.kind === 'directory') {
+      if (item.children?.length === '0') {
         asx.push({
           key: path + item.name,
           title: item.name,
@@ -58,7 +58,7 @@ export const fileUpLoadClick = () => {
 
 // 拿到文件的信息，进行一个处理  handle showDirectoryPicker拿到的文件信息
 const processHandle = async (handle: any) => {
-  if (handle.kind === "file") {
+  if (handle.kind === 'file') {
     return handle;
   }
   handle.children = [];
