@@ -20,7 +20,7 @@ type SideWidthType = {
   minWidth: number;
 };
 const sideWidth: Ref<SideWidthType> = ref({
-  width: 400,
+  width: 300,
   minWidth: 200,
 });
 
@@ -126,52 +126,51 @@ const onTreeDataChange = (data: Tree[]) => {
 const onStatusChange = (status: CodeStatus) => {
   state.status = status;
 };
+
+const fileListMouseDown = (e: any) => {
+  if (e.button !== 0) {//左键判断
+    return
+  }
+  // let downX: number = e.pageX;
+  window.onmousemove = function (e) {
+    sideWidth.value.width = e.pageX
+    e.pageX<=200? sideWidth.value.width=200:''
+  }
+  window.onmouseup = window.onmouseleave = function (e) {
+    if (e.button === 0) {
+      window.onmousemove = null
+    }
+  }
+
+
+}
 </script>
 
 <template>
   <div class="container">
     <header class="header">
-      <NavBar
-        :themeKey="state.themeKey"
-        @changeTheme="(key) => (state.themeKey = key)"
-        @treeDataChange="onTreeDataChange"
-        @statusChange="onStatusChange"
-      ></NavBar>
+      <NavBar :themeKey="state.themeKey" @changeTheme="(key) => (state.themeKey = key)" @treeDataChange="onTreeDataChange"
+        @statusChange="onStatusChange"></NavBar>
     </header>
     <div class="wrapper">
-      <div
-        class="side"
-        :style="{
-          width: sideWidth.width + 'px',
-          minWidth: sideWidth.minWidth + 'px',
-        }"
-      >
-        <FileSelect
-          :status="state.status"
-          :selectedTreeKey="state.selectedTreeKeys"
-          :treeData="state.treeData"
-          @treeSelectedKeysChange="onTreeSelectedKeyChange"
-          @treeSelectedDataChange="onTreeSelectedDataChange"
-          @treeDataChange="onTreeDataChange"
-          @statusChange="onStatusChange"
-        />
+      <div class="side" :style="{
+        width: sideWidth.width + 'px',
+        minWidth: sideWidth.minWidth + 'px',
+      }">
+        <FileSelect :status="state.status" :selectedTreeKey="state.selectedTreeKeys" :treeData="state.treeData"
+          @treeSelectedKeysChange="onTreeSelectedKeyChange" @treeSelectedDataChange="onTreeSelectedDataChange"
+          @treeDataChange="onTreeDataChange" @statusChange="onStatusChange" />
       </div>
-      <div
-        class="content"
-        :style="{
-          width: `calc(100% - ${sideWidth.width}px )`,
-        }"
-      >
-        <Code
-          :status="state.status"
-          :themeKey="state.themeKey"
-          :fileList="codeState.codeFileList"
-          :selectedFileKey="codeState.selectedFileKey"
-          @selectedFileKeychange="(key) => (codeState.selectedFileKey = key)"
-          @selectedDataChange="onCodeSelectedChange"
-          @status-change="onStatusChange"
-          @tree-data-change="onTreeDataChange"
-        ></Code>
+      <div class="flie-mouse" @mousedown="fileListMouseDown" :style="{
+        left: sideWidth.width - 2 + 'px',
+      }"></div>
+      <div class="content"  :style="{
+        width: `calc(100% - ${sideWidth.width}px )`,
+      }">
+        <Code :status="state.status" :themeKey="state.themeKey" :fileList="codeState.codeFileList"
+          :selectedFileKey="codeState.selectedFileKey" @selectedFileKeychange="(key) => (codeState.selectedFileKey = key)"
+          @selectedDataChange="onCodeSelectedChange" @status-change="onStatusChange"
+          @tree-data-change="onTreeDataChange"></Code>
       </div>
     </div>
   </div>
@@ -182,9 +181,11 @@ const onStatusChange = (status: CodeStatus) => {
   width: 100%;
   height: 100vh;
   background-color: var(--color-background);
+
   .header {
     background-color: var(--color-background-mute);
   }
+
   .wrapper {
     display: flex;
     width: 100%;
@@ -194,11 +195,25 @@ const onStatusChange = (status: CodeStatus) => {
       height: 100%;
       background-color: var(--black-soft);
     }
+
     .content {
       flex: 1 1 auto;
       height: 100%;
       background-color: var(--color-background);
     }
+  }
+
+  .flie-mouse {
+    width: 4px;
+    height: 100%;
+    position: absolute;
+    top: 2;
+  }
+
+  .flie-mouse:hover {
+    z-index: 1;
+    cursor: col-resize;
+    background-color: var(--button-primary-background);
   }
 }
 </style>

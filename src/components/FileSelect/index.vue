@@ -13,7 +13,7 @@
         ></a-directory-tree>
       </div>
       <div v-else class="select-btn">
-        <Button :width="300" @click="fileShowDirectoryPicker">
+        <Button :width="'80%'" @click="fileShowDirectoryPicker">
           打开文件夹</Button
         >
       </div>
